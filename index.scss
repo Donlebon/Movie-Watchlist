@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cinzel', serif;
+}
+
+// Container
+
+.container{
+    display: flex;
+    position: relative;
+}
+
+// Header
+
+header{
+    background-image: url("movie-background.jpg");
+    background-position: 50% 77%;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 4.5em;
+    background-color: #404040;
+    background-blend-mode: multiply;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.searchbar{
+    position: absolute;
+    width: 500px;
+    padding: 0.5em;
+    margin-top: 14em;
+}
+
+nav{
+    align-items: center;
+}
