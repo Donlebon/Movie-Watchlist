@@ -2,15 +2,22 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Cinzel", serif;
+  font-family: "Glegoo", sans-serif;
 }
 
-.container {
+.flex {
   display: flex;
-  position: relative;
 }
 
 header {
+  margin-bottom: 4em;
+}
+header h1 {
+  font-weight: 700;
+}
+header .title {
+  align-items: center;
+  justify-content: space-evenly;
   background-image: url("movie-background.jpg");
   background-position: 50% 77%;
   background-repeat: no-repeat;
@@ -18,17 +25,116 @@ header {
   padding: 4.5em;
   background-color: #404040;
   background-blend-mode: multiply;
-  align-items: center;
-  justify-content: space-evenly;
 }
 
-.searchbar {
+.searchbar-container {
   position: absolute;
+  margin-top: 12.4em;
+}
+.searchbar-container .search-icon {
+  position: absolute;
+  top: 17.5px;
+  left: 16px;
+  height: 22px;
+  width: 22px;
+}
+.searchbar-container .searchbar {
+  border: 1px solid #D1D5DB;
+  padding: 0.8em 3.5em;
   width: 500px;
-  padding: 0.5em;
-  margin-top: 14em;
+  border-top-left-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+  font-size: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.searchbar-container .searchbar:focus::-moz-placeholder {
+  color: transparent;
+}
+.searchbar-container .searchbar:focus:-ms-input-placeholder {
+  color: transparent;
+}
+.searchbar-container .searchbar:focus::placeholder {
+  color: transparent;
+}
+.searchbar-container .search {
+  border: 1px solid #D1D5DB;
+  padding: 0.8em 3.5em;
+  cursor: pointer;
+  border-left-style: none;
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.searchbar-container .search:hover {
+  background-color: #cbcfd5;
+  border-color: #cbcfd5;
 }
 
-nav {
+.explore {
+  text-align: center;
+  margin-top: 10em;
+  color: #D1D5DB;
+}
+
+textarea:focus, input:focus {
+  outline: none;
+}
+
+.container {
+  justify-content: center;
   align-items: center;
+  border-bottom: 1.5px solid #D1D5DB;
+  max-width: 700px;
+  margin: auto;
+  padding-bottom: 1.5em;
+  margin-top: 1.5em;
+}
+
+.movie-image {
+  height: 190px;
+  width: 150px;
+}
+
+.movie-info {
+  padding-left: 1.6em;
+  max-height: 100%;
+}
+
+.movie-title {
+  align-items: center;
+}
+.movie-title h4 {
+  margin-left: 0.3em;
+  font-size: 1.3rem;
+  padding-bottom: 0.35em;
+}
+
+.movie-description {
+  margin: 1em 0;
+  font-size: 1.2rem;
+}
+.movie-description .genre {
+  margin-left: 2em;
+}
+.movie-description .align {
+  align-items: center;
+  margin-left: 2em;
+}
+.movie-description .watchlist {
+  margin-left: 0.3em;
+}
+.movie-description .add-watchlist {
+  cursor: pointer;
+}
+
+.movie-plot {
+  font-size: 1rem;
+}
+
+.star {
+  margin-left: 1.2em;
+  height: 22px;
+  width: 22px;
+  padding-bottom: 0.35em;
 }/*# sourceMappingURL=index.css.map */

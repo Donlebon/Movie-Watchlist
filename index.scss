@@ -2,37 +2,159 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Cinzel', serif;
+    font-family: 'Glegoo', sans-serif;
 }
 
-// Container
+$border-color: #D1D5DB;
 
-.container{
+// General Styling
+
+.flex{
     display: flex;
-    position: relative;
 }
 
 // Header
 
-header{
-    background-image: url("movie-background.jpg");
-    background-position: 50% 77%;
-    background-repeat: no-repeat;
-    color: white;
-    padding: 4.5em;
-    background-color: #404040;
-    background-blend-mode: multiply;
-    align-items: center;
-    justify-content: space-evenly;
+header  {
+
+margin-bottom: 4em;
+
+
+    h1{
+        font-weight: 700;
+    }
+
+    .title{
+        align-items: center;
+        justify-content: space-evenly;
+        background-image: url("movie-background.jpg");
+        background-position: 50% 77%;
+        background-repeat: no-repeat;
+        color: white;
+        padding: 4.5em;
+        background-color: #404040;
+        background-blend-mode: multiply;
+    }
 }
 
-.searchbar{
+.searchbar-container{
     position: absolute;
-    width: 500px;
-    padding: 0.5em;
-    margin-top: 14em;
+    margin-top: 12.4em;
+
+    .search-icon{
+        position: absolute;
+        top: 17.5px;
+        left: 16px;
+        height: 22px;
+        width: 22px;
+    }
+
+    .searchbar{
+        border: 1px solid $border-color;
+        padding: 0.8em 3.5em;
+        width: 500px;
+        border-top-left-radius: 0.3em;
+        border-bottom-left-radius: 0.3em;
+        font-size: 1rem;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+        &:focus::placeholder{
+            color: transparent;
+        }
+    }
+
+    .search{
+        border: 1px solid $border-color;
+        padding: 0.8em 3.5em;
+        cursor: pointer;
+        border-left-style: none;
+        border-top-right-radius: 0.3em;
+        border-bottom-right-radius: 0.3em;
+        font-weight: 700;
+        font-size: 1rem;
+
+        &:hover{
+            background-color: #cbcfd5;
+            border-color: #cbcfd5;
+        }
+    }
 }
 
-nav{
-    align-items: center;
+// Initial State
+
+.explore{
+    text-align: center;
+    margin-top: 10em;
+    color: $border-color;
 }
+
+// Movie Card
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.container{
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1.5px solid $border-color;
+    max-width: 700px;
+    margin: auto;
+    padding-bottom: 1.5em;
+    margin-top: 1.5em;
+}
+
+.movie-image{
+    height: 190px;
+    width: 150px;
+}
+.movie-info{
+    padding-left: 1.6em;
+    max-height: 100%;
+}
+
+.movie-title{
+    align-items: center;
+
+    h4{
+        margin-left: 0.3em;
+        font-size: 1.3rem;
+        padding-bottom: 0.35em;
+    }
+}
+
+.movie-description{
+    margin: 1em 0;
+    font-size: 1.2rem;
+
+    .genre{
+        margin-left: 2em;
+    }
+
+    .align{
+        align-items: center;
+        margin-left: 2em;
+    }
+
+    .watchlist{
+        margin-left: 0.3em;
+    }
+
+    .add-watchlist{
+        cursor: pointer
+    }
+
+}
+
+.movie-plot{
+    font-size: 1rem;
+}
+
+.star{
+    margin-left: 1.2em;
+    height: 22px;
+    width: 22px;
+    padding-bottom: 0.35em;
+}
+
+
