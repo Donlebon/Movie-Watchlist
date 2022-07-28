@@ -88,6 +88,10 @@ margin-bottom: 4em;
     color: $border-color;
 }
 
+.explore-container{
+    justify-content: center;
+}
+
 // Movie Card
 
 textarea:focus, input:focus{
@@ -111,10 +115,15 @@ textarea:focus, input:focus{
 .movie-info{
     padding-left: 1.6em;
     max-height: 100%;
+    width: 700px;
 }
 
 .movie-title{
     align-items: center;
+
+    h2{
+        font-size: 1.3rem;
+    }
 
     h4{
         margin-left: 0.3em;

@@ -77,6 +77,10 @@ header .title {
   color: #D1D5DB;
 }
 
+.explore-container {
+  justify-content: center;
+}
+
 textarea:focus, input:focus {
   outline: none;
 }
@@ -99,10 +103,14 @@ textarea:focus, input:focus {
 .movie-info {
   padding-left: 1.6em;
   max-height: 100%;
+  width: 700px;
 }
 
 .movie-title {
   align-items: center;
+}
+.movie-title h2 {
+  font-size: 1.3rem;
 }
 .movie-title h4 {
   margin-left: 0.3em;
