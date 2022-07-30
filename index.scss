@@ -35,6 +35,11 @@ margin-bottom: 4em;
         background-color: #404040;
         background-blend-mode: multiply;
     }
+
+    .watchlist{
+        text-decoration: none;
+        color: white;
+    }
 }
 
 .searchbar-container{
@@ -145,7 +150,7 @@ textarea:focus, input:focus{
         margin-left: 2em;
     }
 
-    .watchlist{
+    .watchlist-movies{
         margin-left: 0.3em;
     }
 
@@ -167,3 +172,30 @@ textarea:focus, input:focus{
 }
 
 
+.searchError{
+    text-align: center;
+    margin-top: 10em;
+    color: $border-color;
+    font-weight: 700;
+    font-size: 1.3em;
+}
+
+// Watchlist Page
+
+.watchlist-add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    h1{
+        margin-left: 0.2em;
+        color: black;
+        text-decoration: none;
+    }
+    
+}
+
+.watchlist-icon{
+    cursor: pointer;
+}

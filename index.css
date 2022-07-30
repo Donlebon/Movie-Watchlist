@@ -26,6 +26,10 @@ header .title {
   background-color: #404040;
   background-blend-mode: multiply;
 }
+header .watchlist {
+  text-decoration: none;
+  color: white;
+}
 
 .searchbar-container {
   position: absolute;
@@ -129,7 +133,7 @@ textarea:focus, input:focus {
   align-items: center;
   margin-left: 2em;
 }
-.movie-description .watchlist {
+.movie-description .watchlist-movies {
   margin-left: 0.3em;
 }
 .movie-description .add-watchlist {
@@ -145,4 +149,28 @@ textarea:focus, input:focus {
   height: 22px;
   width: 22px;
   padding-bottom: 0.35em;
+}
+
+.searchError {
+  text-align: center;
+  margin-top: 10em;
+  color: #D1D5DB;
+  font-weight: 700;
+  font-size: 1.3em;
+}
+
+.watchlist-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.watchlist-add h1 {
+  margin-left: 0.2em;
+  color: black;
+  text-decoration: none;
+}
+
+.watchlist-icon {
+  cursor: pointer;
 }/*# sourceMappingURL=index.css.map */

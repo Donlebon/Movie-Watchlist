@@ -8,6 +8,7 @@ let exploreMessage = document.querySelector(".explore-message")
 
 let searchList = document.querySelector(".searchlist")
 
+
 searchBar.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -15,16 +16,21 @@ searchBar.addEventListener("keypress", function(event) {
     }
 });
 
-
-
 searchButton.addEventListener("click", async function getMovies(){
-        // disableButton()
         let movies = []
         let userInput = searchBar.value
         let res = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e09e20e0&s=${userInput}`)
         let data = await res.json()
         if (data.Error == "Movie not found!" || userInput == ""){
             exploreMessage.textContent = "Unable to find what you're looking for. Please try another search."
+            if(search == true){
+                let article = document.querySelectorAll(".container")
+                for(let i = 0; i < article.length; i++){
+                    article[i].remove()
+                }
+                searchList.classList.add("searchError")
+                searchList.innerHTML = "Unable to find what you're looking for. Please try another search."
+            } 
             return 
         }
         let allResults = data.Search
@@ -34,16 +40,13 @@ searchButton.addEventListener("click", async function getMovies(){
         for(let i = 0; i < onlyMovies.length; i++){
             movies.push(onlyMovies[i].Title)
         }       
-        getInfo(movies)
-        // setTimeout(() => {
-        //     searchButton.disabled = false;
-        // }, 400)
+        getInfo(movies, data, userInput)
+        disableButton()
+        setTimeout(() => {
+            searchButton.disabled = false;
+        }, 400)
         }  
 )
-
-
-
-
 
 // Fetch Specific Movie
 
@@ -56,6 +59,8 @@ async function getInfo(movies){
             article[i].remove()
         }
     } 
+    searchList.classList.remove("searchError")
+    searchList.innerHTML = ""
     articleContainer.remove()
     for (let i = 0; i < movies.length; i++){
     let response = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e09e20e0&t=${movies[i]}`)
@@ -63,6 +68,8 @@ async function getInfo(movies){
     addMovieList(results)
     search = true
 }
+    addToWatchList()
+    // removeFromWatchList()
 }
     
 function addMovieList(results){
@@ -80,10 +87,10 @@ function addMovieList(results){
             <h5>${results.Runtime}</h5>
             <h5 class = "genre">${results.Genre}</h5>
             <div class = "flex align"> 
-                <svg width="16" height="16" class = "add-watchlist" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="16" height="16" class = "watchlist-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM9 5C9 4.44772 8.55228 4 8 4C7.44772 4 7 4.44772 7 5V7H5C4.44772 7 4 7.44771 4 8C4 8.55228 4.44772 9 5 9H7V11C7 11.5523 7.44772 12 8 12C8.55228 12 9 11.5523 9 11V9H11C11.5523 9 12 8.55228 12 8C12 7.44772 11.5523 7 11 7H9V5Z" fill="#111827"/>
                 </svg>
-                <h5 class = "watchlist">Watchlist</h5>
+                <h5 class = "watchlist-movies">Watchlist</h5>
             </div>  
         </div>
         <h3 class = "movie-plot">${results.Plot}</h3>
@@ -97,8 +104,61 @@ function disableButton(){
     searchButton.style.backgroundColor = "#EFEFEF";
     searchButton.style.color = "black";
 }
-setTimeout(() => {
-    searchButton.disabled = false;
-}, 1000)
-    
+
+// Adding Movie to Watchlist 
+
+let j = 0;
+let clicked = false
+
+
+function addToWatchList(){
+    let align = document.querySelectorAll(".align")
+    for(let i = 0; i < align.length; i++){
+        align[i].addEventListener("click", function(e){
+            align[i].innerHTML = `<svg width="16" height="16" class = "watchlist-remove" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM5 7C4.44772 7 4 7.44772 4 8C4 8.55228 4.44772 9 5 9H11C11.5523 9 12 8.55229 12 8C12 7.44772 11.5523 7 11 7H5Z" fill="#111827"/>
+            </svg> <h5 class = "watchlist-movies">Watchlist</h5>`
+            addToLocalStorage(e)
+            clicked = true;
+        })
+    } 
+}
+
+
+
+function addToLocalStorage(e){
+    let movieList = [];
+    console.log(e.composedPath())
+    if(e.composedPath().length == 11){
+        for(let i = 1; i < 6; i++){
+            movieList.push(e.composedPath()[i])
+         }
+    } else {
+        for(let i = 0; i < 5; i++){
+            movieList.push(e.composedPath()[i])
+         }
+    }
+    let addedMovie = JSON.stringify(movieList)
+    localStorage.setItem(`movie${j}`, addedMovie)
+    j++;
+}
+
+localStorage.clear()
+
+
+// function removeFromWatchList(){
+//     if (clicked){
+//     let watchListRemove = document.querySelectorAll(".watchlist-remove")
+//     console.log(watchListRemove)
+//     for(let i = 0; i < watchListRemove.length; i++){
+//         watchListRemove[i].addEventListener("click", function(e){
+//             watchListRemove[i].textContent = `<svg width="16" height="16" class = "watchlist-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+//             <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM9 5C9 4.44772 8.55228 4 8 4C7.44772 4 7 4.44772 7 5V7H5C4.44772 7 4 7.44771 4 8C4 8.55228 4.44772 9 5 9H7V11C7 11.5523 7.44772 12 8 12C8.55228 12 9 11.5523 9 11V9H11C11.5523 9 12 8.55228 12 8C12 7.44772 11.5523 7 11 7H9V5Z" fill="#111827"/>
+//             </svg>`
+//             console.log("Hello")
+//     })}}
+// }
+
+
+
 
