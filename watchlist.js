@@ -5,27 +5,33 @@ let clear = document.querySelector(".clear-watchlist")
 
 function clearStorage(e){
     localStorage.clear()
-    location.reload()
     e.target.classList.remove("picker-original")
     e.target.classList.add("picker-clicked")
     setTimeout(() => {
         e.target.classList.remove("picker-clicked")
         e.target.classList.add("picker-original")
         }, 125)
+    setTimeout(() => { 
+        location.reload()
+    }, 150)
 }
 
 clear.addEventListener("click", clearStorage)
 
+function getTotalMovies(){
+    let movieStorage = Object.keys(localStorage)
+    return movieStorage
+}
 
-for(let i = 0; i < localStorage.length; i++){
+getTotalMovies().forEach(element => {
     explore.remove()
     let newDiv = document.createElement("article")
     newDiv.classList.add("container")
     newDiv.classList.add("flex")
     searchList.appendChild(newDiv)
-    let storedMovie = JSON.parse(localStorage.getItem("movie" + i))
-    newDiv.innerHTML += storedMovie[0]
-}
+    let storedMovie = JSON.parse(localStorage.getItem(element))
+    newDiv.innerHTML = storedMovie
+})  
 
 
 let added = document.querySelectorAll(".added")
@@ -43,44 +49,35 @@ function addRemove(){
 
 addRemove()
 
+let movieTitle = document.querySelectorAll(".movie-title")
 
 let container = document.querySelectorAll(".container")
 let iconRemove = document.querySelectorAll(".icon-remove")
 
-// console.log(container[0].innerText.includes("The Last: Naruto the Movie"))
-
-let localElement = container[0].innerHTML;
-let localMovie = JSON.parse(localStorage.getItem("movie0"));
-
-for(let i = 0; i < iconRemove.length; i++){
-    iconRemove[i].addEventListener("click", function(e){
-        // if(e.composedPath().length == 10){
-        //     e.composedPath()[4].remove()
-        // } else if(e.composedPath().length == 11){
-        //     e.composedPath()[5].remove()
-        // }
-        if(e.composedPath()[5] == container[0]){
-            console.log("true")
-        } else{
-            console.log("false")
+function checkifMatches(e, checkTitle, checkPlot){
+    getTotalMovies().forEach((element, index) => {
+        let localMovie = JSON.parse(localStorage.getItem(element))
+        if(localMovie[0].includes(checkTitle) && localMovie[0].includes(checkPlot)){
+            localStorage.removeItem(element)
         }
     })
 }
 
 
-// console.log(localElement)
-// console.log(localMovie[0])
 
 
-// if (localElement == localMovie[0]){
-//     console.log("true")
-// } else{
-//     console.log("false")
-// }
-
-
-
-// function removeFromList(){
-//     localStorage.removeItem("movie0")
-// }
-
+iconRemove.forEach(element => {
+    element.addEventListener("click", function(e){
+        if(e.composedPath().length == 10){
+            let checkPlot = e.composedPath()[3].children[2].innerText
+            let checkTitle = e.composedPath()[3].children[0].firstElementChild.innerText
+            checkifMatches(e, checkTitle, checkPlot)
+            location.reload()
+        } else if(e.composedPath().length == 11){
+            let checkPlot = e.composedPath()[4].children[2].innerText
+            let checkTitle = e.composedPath()[4].children[0].firstElementChild.innerText
+            checkifMatches(e, checkTitle, checkPlot)
+            location.reload()
+        }
+    })
+})
