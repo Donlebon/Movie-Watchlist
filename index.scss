@@ -19,7 +19,6 @@ header  {
 
 margin-bottom: 4em;
 
-
     h1{
         font-weight: 700;
     }
@@ -198,4 +197,40 @@ textarea:focus, input:focus{
 
 .watchlist-icon{
     cursor: pointer;
+}
+
+.added{
+    font-size: 1rem;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+}
+
+.icon-remove{
+    cursor: pointer;
+}
+
+
+.clear-watchlist{
+    position: absolute;
+    top: 215px;
+    right: 20px;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    border-style: none;
+    background-color: #FF1E00;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.picker-original{
+    background-color: #FF1E00;
+    color: white;
+    transition: 200ms;
+}
+
+.picker-clicked{
+    background-color: white;
+    color: #FF1E00;
+    transition: 200ms;
 }

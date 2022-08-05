@@ -68,7 +68,9 @@ async function getInfo(movies){
     addMovieList(results)
     search = true
 }
-    addToWatchList()
+    let addIcon = document.querySelectorAll(".watchlist-icon")
+    
+    addToWatchList(addIcon)
     // removeFromWatchList()
 }
     
@@ -95,9 +97,9 @@ function addMovieList(results){
         </div>
         <h3 class = "movie-plot">${results.Plot}</h3>
     </div>
-</article>
-`
+</article>`
 }
+
 
 function disableButton(){
     searchButton.disabled = true;
@@ -107,44 +109,75 @@ function disableButton(){
 
 // Adding Movie to Watchlist 
 
-let j = 0;
 let clicked = false
 
-
-function addToWatchList(){
+function addToWatchList(addIcon){
     let align = document.querySelectorAll(".align")
-    for(let i = 0; i < align.length; i++){
-        align[i].addEventListener("click", function(e){
-            align[i].innerHTML = `<svg width="16" height="16" class = "watchlist-remove" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM5 7C4.44772 7 4 7.44772 4 8C4 8.55228 4.44772 9 5 9H11C11.5523 9 12 8.55229 12 8C12 7.44772 11.5523 7 11 7H5Z" fill="#111827"/>
-            </svg> <h5 class = "watchlist-movies">Watchlist</h5>`
+    for(let i = 0; i < addIcon.length; i++){
+        addIcon[i].addEventListener("click", function(e){
+            align[i].innerHTML = "Added!"
+            align[i].classList.add("added")
+            testing()
             addToLocalStorage(e)
-            clicked = true;
         })
-    } 
+    }
 }
 
+let j = 0;
 
+function testing(){
+    if(localStorage.length == 0){
+        j = 0;
+    }
+    else{
+        j = localStorage.length
+    }
+}
 
 function addToLocalStorage(e){
-    let movieList = [];
-    console.log(e.composedPath())
-    if(e.composedPath().length == 11){
-        for(let i = 1; i < 6; i++){
-            movieList.push(e.composedPath()[i])
-         }
-    } else {
-        for(let i = 0; i < 5; i++){
-            movieList.push(e.composedPath()[i])
-         }
-    }
-    let addedMovie = JSON.stringify(movieList)
-    localStorage.setItem(`movie${j}`, addedMovie)
-    j++;
+        let movieList = [];
+        if(e.composedPath().length == 10){
+            movieList.push(e.composedPath()[4].innerHTML)
+        } else if(e.composedPath().length == 11){
+            movieList.push(e.composedPath()[5].innerHTML)
+        }
+        console.log(e.composedPath()[4].innerHTML)
+        let addedMovie = JSON.stringify(movieList)
+        localStorage.setItem(`movie${j}`, addedMovie)
+        j++;
 }
 
-localStorage.clear()
+// localStorage.clear()
 
+// let addedMovie = JSON.stringify(movieList)
+//         console.log(movieList[0])
+//         localStorage.setItem(`movie${j}`, addedMovie)
+//         j++;
+
+
+
+// function addToWatchList(){
+//     let align = document.querySelectorAll(".align")
+//     for(let i = 0; i < align.length; i++){
+//         align[i].addEventListener("click", function (e){
+//             align[i].innerHTML = "Added!"
+//             align[i].classList.add("added")
+//             addToLocalStorage(e)
+//             console.log(e)
+//         })
+//     } 
+// }
+
+
+
+// function addToLocalStorage(e){
+//     let movieList = [];
+//     movieList.push(e.composedPath()[5].innerHTML)
+//     console.log(e.composedPath()[5].innerHTML)
+//     let addedMovie = JSON.stringify(movieList)
+//     localStorage.setItem(`movie${j}`, addedMovie)
+//     j++;
+// }
 
 // function removeFromWatchList(){
 //     if (clicked){
