@@ -18,7 +18,7 @@ searchBar.addEventListener("keypress", function(event) {
 searchButton.addEventListener("click", async function getMovies(){
         let movies = []
         let userInput = searchBar.value
-        let res = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e09e20e0&s=${userInput}`)
+        let res = await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=e09e20e0&s=${userInput}`)
         let data = await res.json()
         if (data.Error == "Movie not found!" || userInput == ""){
             exploreMessage.textContent = "Unable to find what you're looking for. Please try another search."
@@ -62,7 +62,7 @@ async function getInfo(movies){
     searchList.innerHTML = ""
     articleContainer.remove()
     for (let i = 0; i < movies.length; i++){
-    let response = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e09e20e0&t=${movies[i]}`)
+    let response = await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=e09e20e0&t=${movies[i]}`)
     let results = await response.json()
     addMovieList(results)
     search = true
