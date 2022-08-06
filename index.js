@@ -8,8 +8,6 @@ let exploreMessage = document.querySelector(".explore-message")
 
 let searchList = document.querySelector(".searchlist")
 
-alert("Hello")
-
 searchBar.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
